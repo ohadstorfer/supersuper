@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Colored Page</title>
+</head>
+<body>
+    <h1>your cart</h1>
+    {% for product in cart %}
+            <li>
+                {{ product.name }} - Price: ${{ product.price }} 
+            
+            </li>
+        {% endfor %}
+
+    <form method="POST" action="/pay">
+        
+        <button type="submit">Pay</button>
+
+    </form>  
+
+</body>
+</html>

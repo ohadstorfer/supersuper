@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
+    <title>Color Links</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .product-image {
+            width: 400px; 
+            height: 400px; 
+            object-fit: cover; 
+        }
+    </style>
+
+</head>
+<body>
+    <h1 class="text-center mx-auto">Welcome to Super Juden</h1>
+    <div class="text-center mx-auto"> <button type="button" class="btn btn-light"><a href="/goToAbout">About Us</a></button><br>
+         <a href="/goToCart">Go to Cart</a><br></div>
+    
+    
+    <h2>Products:</h2>
+    <ul>
+        <!-- static\Milk.jpg -->
+        <div class="card-group">
+        {% for product in products %}
+        <div class="col">
+            <div class="card">
+                <img class="card-img-top product-image" src="static/{{product.name}}.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }} - ${{ product.price }}</h5> 
+                    <p class="card-text">  
+
+                                <form method="POST" action="/add_to_cart">
+                                    <input type="hidden" name="product_name" value="{{ product.name }}">
+                                    <input type="hidden" name="product_price" value="{{ product.price }}">
+                                    <input type="hidden" name="product_availability" value="{{ product.availability }}">
+                                    <button type="submit">Add to Cart</button>
+                                </form>
+                        </p>
+
+                </div>            
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <p>{{ messages[-1] }}</p>
+                {% endif %}
+                {% endwith %}
+    </ul>
+
+    
+    
+</body>
+</html>
